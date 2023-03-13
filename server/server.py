@@ -28,4 +28,11 @@ class SecureMessagingSystem:
         self.curve_secretkey, self.curve_publickey = zmq.auth.load_certificate(str(key_file_path))
         self.authenticator.curve_server = True
 
+    def start(self):
+        while True:
+            message = self.socket.recv_multipart()
+            identity, payload = message[0], message[1:]
+            print(f"Received request from {identity}: {payload}")
+            response = [identity, b"Hello, client!"]
+            self.socket.send_multipart(response)
 
