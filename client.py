@@ -10,3 +10,7 @@ class ZmqClient:
         self.socket.send(message)
         response = self.socket.recv()
         print("Received response: %s" % response)
+
+    def close(self):
+        self.socket.close()
+        self.context.term()
