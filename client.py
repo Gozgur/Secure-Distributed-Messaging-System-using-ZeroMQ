@@ -14,3 +14,7 @@ class ZmqClient:
     def close(self):
         self.socket.close()
         self.context.term()
+
+if __name__ == '__main__':
+    client = ZmqClient("localhost", 5555)
+    client.send_message(b"Hello, server!")  
